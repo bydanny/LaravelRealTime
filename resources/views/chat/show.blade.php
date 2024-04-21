@@ -1,7 +1,9 @@
 @extends('layouts.app')
 @push('styles')
     <style type="text/css">
- 
+    #users > li {
+        cursor: pointer;
+    }
     </style>
 @endpush
 
@@ -56,7 +58,15 @@
  
 @push('scripts')
 <script>
- 
+    function greetUser(id){
+        window.axios.post('/chat/greet/'+id)
+        .then((response) => {
+            console.log(response);
+        });;
+    }
+</script>
 
+<script>
+    var userId = {{ Auth::id() }}; 
 </script>
 @endpush  

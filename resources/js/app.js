@@ -113,6 +113,7 @@ Echo.private('notification')
             let element = document.createElement('li');
     
             element.setAttribute('id', user.id);
+            element.setAttribute('onclick', 'greetUser("' + user.id + '")')
             element.innerText = user.name;
     
             usersElement.appendChild(element);
@@ -122,6 +123,7 @@ Echo.private('notification')
         let element = document.createElement('li');
     
         element.setAttribute('id', user.id);
+        element.setAttribute('onclick', 'greetUser("' + user.id + '")')
         element.innerText = user.name;
 
         usersElement.appendChild(element);
@@ -155,3 +157,17 @@ Echo.private('notification')
         // Reiniciar variable
         messageElement.value = '';
     })
+
+    // function greetUser(id){
+    //     window.axios.post('/chat/greet/'+id);
+    // }
+  
+    Echo.private('chat.greet.'+userId)
+        .listen('GreetingSent', (e) => {
+            let element = document.createElement('li');
+    
+            element.innerText = e.message;
+            element.classList.add('text-success');
+
+            messagesElement.appendChild(element);
+        });
